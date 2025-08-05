@@ -3,6 +3,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+//ROUTES
+import authRoutes from "./routes/authRoutes";
+
 dotenv.config();
 
 const app = express();
@@ -25,7 +28,8 @@ app.get("/", (req, res) => {
   res.send("Password Manager Backend Sunucusu Çalışıyor!");
 });
 
-// Sunucuyu başlat
+app.use("/api/auth", authRoutes);
+
 app.listen(PORT, () => {
   console.log("Sunucu çalışıyor.");
 });
