@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 
 //ROUTES
 import authRoutes from "./routes/authRoutes";
+import passwordRoutes from "./routes/passwordRoutes";
 
 dotenv.config();
 
@@ -29,6 +30,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/api/auth", authRoutes);
+app.use("/api/passwords", passwordRoutes);
 
 app.listen(PORT, () => {
   console.log("Sunucu çalışıyor.");

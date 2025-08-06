@@ -2,7 +2,7 @@
 import mongoose, { Document } from "mongoose";
 import bcrypt from "bcryptjs";
 
-interface IUser extends Document {
+export interface IUser extends Document {
   email: string;
   password: string;
   matchPassword(enteredPassword: string): Promise<boolean>;
