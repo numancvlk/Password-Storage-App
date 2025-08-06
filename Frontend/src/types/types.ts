@@ -13,3 +13,13 @@ export type RootStackParamList = {
   Register: undefined;
   Home: undefined;
 };
+
+export interface PasswordItem {
+  _id: string;
+  user: string;
+  service: string;
+  username: string;
+  password: string;
+  createdAt: string;
+  updatedAt: string;
+}

@@ -7,6 +7,7 @@ import { API_URL } from "@env";
 //TYPES
 import { AuthResponse, ErrorResponse } from "../types/types";
 
+console.log(API_URL);
 export const login = async (email: string, password: string) => {
   try {
     const response = await axios.post<AuthResponse>(`${API_URL}/auth/login`, {
