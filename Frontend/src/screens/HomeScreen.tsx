@@ -1,5 +1,5 @@
-//KÜTÜPHANE
-import React, { useState, useEffect } from "react";
+// KÜTÜPHANE
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -11,6 +11,8 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { useFocusEffect } from "@react-navigation/native";
+import { Ionicons } from "@expo/vector-icons";
 
 //TYPES
 import { RootStackParamList, PasswordItem } from "../types/types";
@@ -19,7 +21,7 @@ import { RootStackParamList, PasswordItem } from "../types/types";
 import { getPasswords, deletePassword } from "../services/passwordApi";
 
 //CONTEXT
-import { useAuth } from "../context/authContext";
+import { useAuth } from "src/context/authContext";
 
 type Props = NativeStackScreenProps<RootStackParamList, "Home">;
 
@@ -28,6 +30,9 @@ const HomeScreen = ({ navigation }: Props) => {
   const [passwords, setPasswords] = useState<PasswordItem[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isDeleting, setIsDeleting] = useState<string | null>(null);
+  const [showPassword, setShowPassword] = useState<{ [key: string]: boolean }>(
+    {}
+  );
 
   const fetchPasswords = async () => {
     try {
@@ -56,32 +61,66 @@ const HomeScreen = ({ navigation }: Props) => {
     }
   };
 
-  useEffect(() => {
-    fetchPasswords();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      fetchPasswords();
+    }, [])
+  );
+
+  const toggleShowPassword = (id: string) => {
+    setShowPassword((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
 
   const renderItem = ({ item }: { item: PasswordItem }) => (
     <View style={styles.passwordItem}>
       <View>
         <Text style={styles.serviceText}>{item.service}</Text>
         <Text style={styles.usernameText}>{item.username}</Text>
-        <Text style={styles.passwordText}>{item.password}</Text>
+        <View style={styles.passwordContainer}>
+          <Text style={styles.passwordText}>
+            {showPassword[item._id] ? item.password : "●●●●●●●●"}
+          </Text>
+          <TouchableOpacity onPress={() => toggleShowPassword(item._id)}>
+            <Ionicons
+              name={showPassword[item._id] ? "eye-off" : "eye"}
+              size={20}
+              color="#6c757d"
+            />
+          </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity
-        onPress={() => handleDelete(item._id)}
-        disabled={isDeleting === item._id}
-      >
-        <Text style={styles.deleteButton}>
-          {isDeleting === item._id ? "Siliniyor..." : "Sil"}
-        </Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("PasswordForm", { passwordItem: item })
+          }
+          style={styles.editButton}
+        >
+          <Text style={styles.editText}>Düzenle</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => handleDelete(item._id)}
+          disabled={isDeleting === item._id}
+          style={styles.deleteButton}
+        >
+          <Text style={styles.deleteText}>
+            {isDeleting === item._id ? "Siliniyor..." : "Sil"}
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Şifrelerim</Text>
-      <Button title="Yeni Şifre Ekle" onPress={() => {}} />{" "}
+      <Button
+        title="Yeni Şifre Ekle"
+        onPress={() => navigation.navigate("PasswordForm", undefined)}
+      />
       {isLoading ? (
         <ActivityIndicator
           size="large"
@@ -148,8 +187,33 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     marginTop: 5,
   },
+  passwordContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  editButton: {
+    marginRight: 10,
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: "#007bff",
+    borderRadius: 5,
+  },
+  editText: {
+    color: "#fff",
+    fontWeight: "bold",
+  },
   deleteButton: {
-    color: "#dc3545",
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: "#dc3545",
+    borderRadius: 5,
+  },
+  deleteText: {
+    color: "#fff",
     fontWeight: "bold",
   },
   emptyText: {

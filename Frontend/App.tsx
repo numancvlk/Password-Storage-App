@@ -8,6 +8,7 @@ import { StatusBar } from "react-native";
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import HomeScreen from "./src/screens/HomeScreen";
+import PasswordFormScreen from "src/screens/PasswordFormScreen";
 
 // CONTEXT
 import { AuthProvider, useAuth } from "./src/context/authContext";
@@ -39,6 +40,11 @@ const AppScreens = () => (
       name="Home"
       component={HomeScreen}
       options={{ headerShown: false }}
+    />
+    <AppStack.Screen
+      name="PasswordForm"
+      component={PasswordFormScreen}
+      options={{ title: "Şifre Ekle/Düzenle" }}
     />
   </AppStack.Navigator>
 );

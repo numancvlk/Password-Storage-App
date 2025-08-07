@@ -12,6 +12,7 @@ export type RootStackParamList = {
   Login: undefined;
   Register: undefined;
   Home: undefined;
+  PasswordForm: { passwordItem?: PasswordItem } | undefined;
 };
 
 export interface PasswordItem {
