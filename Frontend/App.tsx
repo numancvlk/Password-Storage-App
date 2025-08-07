@@ -9,6 +9,7 @@ import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
 import HomeScreen from "./src/screens/HomeScreen";
 import PasswordFormScreen from "src/screens/PasswordFormScreen";
+import PasswordDetailScreen from "src/screens/PasswordDetailScreen";
 
 // CONTEXT
 import { AuthProvider, useAuth } from "./src/context/authContext";
@@ -45,6 +46,11 @@ const AppScreens = () => (
       name="PasswordForm"
       component={PasswordFormScreen}
       options={{ title: "Şifre Ekle/Düzenle" }}
+    />
+    <AppStack.Screen
+      name="PasswordDetail"
+      component={PasswordDetailScreen}
+      options={{ title: "Şifre Detayı" }}
     />
   </AppStack.Navigator>
 );

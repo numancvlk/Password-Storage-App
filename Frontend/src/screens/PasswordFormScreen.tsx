@@ -2,7 +2,11 @@
 import React, { useState } from "react";
 import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
+//TYPES
 import { RootStackParamList } from "../types/types";
+
+//SERVICES
 import { createPassword, updatePassword } from "../services/passwordApi";
 
 type Props = NativeStackScreenProps<RootStackParamList, "PasswordForm">;

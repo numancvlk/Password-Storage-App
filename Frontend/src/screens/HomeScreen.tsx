@@ -75,22 +75,15 @@ const HomeScreen = ({ navigation }: Props) => {
   };
 
   const renderItem = ({ item }: { item: PasswordItem }) => (
-    <View style={styles.passwordItem}>
+    <TouchableOpacity // <-- item'a basılabilir yap
+      style={styles.passwordItem}
+      onPress={() =>
+        navigation.navigate("PasswordDetail", { passwordItem: item })
+      }
+    >
       <View>
         <Text style={styles.serviceText}>{item.service}</Text>
         <Text style={styles.usernameText}>{item.username}</Text>
-        <View style={styles.passwordContainer}>
-          <Text style={styles.passwordText}>
-            {showPassword[item._id] ? item.password : "●●●●●●●●"}
-          </Text>
-          <TouchableOpacity onPress={() => toggleShowPassword(item._id)}>
-            <Ionicons
-              name={showPassword[item._id] ? "eye-off" : "eye"}
-              size={20}
-              color="#6c757d"
-            />
-          </TouchableOpacity>
-        </View>
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity
@@ -111,7 +104,7 @@ const HomeScreen = ({ navigation }: Props) => {
           </Text>
         </TouchableOpacity>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 
   return (
