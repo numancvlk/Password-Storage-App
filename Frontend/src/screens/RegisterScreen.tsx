@@ -1,6 +1,13 @@
 //KÜTÜPHANELER
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  Alert,
+  ActivityIndicator,
+} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { AxiosError } from "axios";
 import { RootStackParamList, ErrorResponse } from "../types/types";
@@ -61,10 +68,14 @@ const RegisterScreen = ({ navigation }: Props) => {
 
   return (
     <View style={registerStyles.container}>
-      <Text style={registerStyles.title}>Kayıt Ol</Text>
+      <View style={registerStyles.logoContainer}>
+        <Text style={registerStyles.logo}>PassShield</Text>
+        <Text style={registerStyles.slogan}>Hesap Oluştur</Text>
+      </View>
       <TextInput
         style={registerStyles.input}
         placeholder="E-posta"
+        placeholderTextColor="#6c757d"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -73,19 +84,34 @@ const RegisterScreen = ({ navigation }: Props) => {
       <TextInput
         style={registerStyles.input}
         placeholder="Şifre"
+        placeholderTextColor="#6c757d"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
-      <Button
-        title={isLoading ? "Yükleniyor..." : "Kayıt Ol"}
+      <TouchableOpacity
+        style={registerStyles.buttonContainer}
         onPress={handleRegister}
         disabled={isLoading}
-      />
-      <Button
-        title="Zaten bir hesabınız var mı? Giriş Yap"
+      >
+        <View style={registerStyles.button}>
+          {isLoading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={registerStyles.buttonText}>Kayıt Ol</Text>
+          )}
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={registerStyles.buttonContainer}
         onPress={() => navigation.navigate("Login")}
-      />
+      >
+        <View style={registerStyles.secondaryButton}>
+          <Text style={registerStyles.secondaryButtonText}>
+            Zaten bir hesabınız var mı? Giriş Yap
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
