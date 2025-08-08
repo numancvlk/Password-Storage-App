@@ -36,7 +36,17 @@ const AuthScreens = () => (
 );
 
 const AppScreens = () => (
-  <AppStack.Navigator>
+  <AppStack.Navigator
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: "#1c2125",
+      },
+      headerTintColor: "#f8f9fa",
+      headerTitleStyle: {
+        fontWeight: "bold",
+      },
+    }}
+  >
     <AppStack.Screen
       name="Home"
       component={HomeScreen}

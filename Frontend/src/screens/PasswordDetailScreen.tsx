@@ -1,19 +1,15 @@
 //KÜTÜPHANELER
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Button,
-  TouchableOpacity,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, Alert } from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
 
 //TYPES
 import { RootStackParamList } from "../types/types";
+
+//STYLES
+import { passwordDetailStyles } from "src/styles/PasswordDetailScreenStyles";
 
 type Props = NativeStackScreenProps<RootStackParamList, "PasswordDetail">;
 
@@ -32,13 +28,17 @@ const PasswordDetailScreen = ({ route, navigation }: Props) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.serviceTitle}>{passwordItem.service}</Text>
+    <View style={passwordDetailStyles.container}>
+      <Text style={passwordDetailStyles.serviceTitle}>
+        {passwordItem.service}
+      </Text>
 
-      <View style={styles.detailCard}>
-        <Text style={styles.label}>Kullanıcı Adı:</Text>
-        <View style={styles.copyableContainer}>
-          <Text style={styles.value}>{passwordItem.username}</Text>
+      <View style={passwordDetailStyles.detailCard}>
+        <Text style={passwordDetailStyles.label}>Kullanıcı Adı:</Text>
+        <View style={passwordDetailStyles.copyableContainer}>
+          <Text style={passwordDetailStyles.value}>
+            {passwordItem.username}
+          </Text>
           <TouchableOpacity
             onPress={() => handleCopy(passwordItem.username, "username")}
           >
@@ -47,20 +47,20 @@ const PasswordDetailScreen = ({ route, navigation }: Props) => {
         </View>
       </View>
 
-      <View style={styles.detailCard}>
-        <Text style={styles.label}>Şifre:</Text>
-        <View style={styles.passwordContainer}>
-          <Text style={styles.value}>
+      <View style={passwordDetailStyles.detailCard}>
+        <Text style={passwordDetailStyles.label}>Şifre:</Text>
+        <View style={passwordDetailStyles.passwordContainer}>
+          <Text style={passwordDetailStyles.value}>
             {showPassword ? passwordItem.password : "●●●●●●●●"}
           </Text>
           <TouchableOpacity
             onPress={() => setShowPassword(!showPassword)}
-            style={styles.eyeIcon}
+            style={passwordDetailStyles.eyeIcon}
           >
             <Ionicons
               name={showPassword ? "eye-off" : "eye"}
               size={24}
-              color="#6c757d"
+              color="#adb5bd"
             />
           </TouchableOpacity>
           {showPassword && (
@@ -73,65 +73,18 @@ const PasswordDetailScreen = ({ route, navigation }: Props) => {
         </View>
       </View>
 
-      <View style={styles.buttonContainer}>
-        <Button
-          title="Şifreyi Düzenle"
+      <View style={passwordDetailStyles.buttonContainer}>
+        <TouchableOpacity
           onPress={() => navigation.navigate("PasswordForm", { passwordItem })}
-          color="#007bff"
-        />
+          style={passwordDetailStyles.editButton}
+        >
+          <Text style={passwordDetailStyles.editButtonText}>
+            Şifreyi Düzenle
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#f8f9fa",
-  },
-  serviceTitle: {
-    fontSize: 32,
-    fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  detailCard: {
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 15,
-    borderWidth: 1,
-    borderColor: "#ddd",
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#6c757d",
-  },
-  value: {
-    fontSize: 18,
-    marginTop: 5,
-  },
-  copyableContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 5,
-  },
-  passwordContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: 5,
-  },
-  eyeIcon: {
-    paddingLeft: 10,
-    paddingRight: 10,
-  },
-  buttonContainer: {
-    marginTop: 20,
-  },
-});
 
 export default PasswordDetailScreen;
