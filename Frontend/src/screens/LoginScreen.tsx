@@ -1,10 +1,21 @@
 // KÜTÜPHANELER
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  Alert,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { RootStackParamList } from "../types/types";
-import { loginStyles } from "../styles/LoginScreenStyles";
 import { AxiosError } from "axios";
+
+//STYLES
+import { loginStyles } from "../styles/LoginScreenStyles";
+
+//TYPES
+import { RootStackParamList } from "../types/types";
 
 // CONTEXT
 import { useAuth } from "../context/authContext";
@@ -42,10 +53,14 @@ const LoginScreen = ({ navigation }: Props) => {
 
   return (
     <View style={loginStyles.container}>
-      <Text style={loginStyles.title}>Giriş Yap</Text>
+      <View style={loginStyles.logoContainer}>
+        <Text style={loginStyles.logo}>PassShield</Text>
+        <Text style={loginStyles.slogan}>Şifreleriniz Güvende</Text>
+      </View>
       <TextInput
         style={loginStyles.input}
         placeholder="E-posta"
+        placeholderTextColor="#6c757d"
         value={email}
         onChangeText={setEmail}
         keyboardType="email-address"
@@ -54,19 +69,34 @@ const LoginScreen = ({ navigation }: Props) => {
       <TextInput
         style={loginStyles.input}
         placeholder="Şifre"
+        placeholderTextColor="#6c757d"
         secureTextEntry
         value={password}
         onChangeText={setPassword}
       />
-      <Button
-        title={isLoading ? "Yükleniyor..." : "Giriş Yap"}
+      <TouchableOpacity
+        style={loginStyles.buttonContainer}
         onPress={handleLogin}
         disabled={isLoading}
-      />
-      <Button
-        title="Hesabınız yok mu? Kayıt Ol"
+      >
+        <View style={loginStyles.button}>
+          {isLoading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={loginStyles.buttonText}>Giriş Yap</Text>
+          )}
+        </View>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={loginStyles.buttonContainer}
         onPress={() => navigation.navigate("Register")}
-      />
+      >
+        <View style={loginStyles.secondaryButton}>
+          <Text style={loginStyles.secondaryButtonText}>
+            Hesabınız yok mu? Kayıt Ol
+          </Text>
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -1,38 +1,64 @@
-//KÜTÜPHANELER
 import { StyleSheet } from "react-native";
 
 export const loginStyles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    padding: 16,
-    backgroundColor: "#f8f8f8",
+    alignItems: "center",
+    padding: 24,
+    backgroundColor: "#1c2125",
   },
-  title: {
-    fontSize: 28,
+  logoContainer: {
+    marginBottom: 40,
+    alignItems: "center",
+  },
+  logo: {
+    fontSize: 48,
     fontWeight: "bold",
-    marginBottom: 24,
-    textAlign: "center",
-    color: "#333",
+    color: "#e2e6ea",
+  },
+  slogan: {
+    fontSize: 16,
+    color: "#6c757d",
+    marginTop: 8,
   },
   input: {
+    width: "100%",
     height: 50,
-    borderColor: "#ccc",
+    backgroundColor: "#333a40",
+    borderColor: "#4a5157",
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 12,
+    paddingHorizontal: 16,
     marginBottom: 16,
-    paddingHorizontal: 12,
-    backgroundColor: "#fff",
-    fontSize: 16,
+    color: "#f8f9fa",
+  },
+  buttonContainer: {
+    width: "100%",
+    borderRadius: 12,
+    overflow: "hidden",
+    marginVertical: 8,
+  },
+  button: {
+    backgroundColor: "#007bff",
+    padding: 16,
+    alignItems: "center",
+    borderRadius: 12,
   },
   buttonText: {
     color: "#fff",
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: "bold",
+  },
+  secondaryButton: {
+    backgroundColor: "#2e343a",
+    padding: 16,
+    alignItems: "center",
+    borderRadius: 12,
   },
   secondaryButtonText: {
     color: "#007bff",
-    marginTop: 12,
-    textAlign: "center",
+    fontSize: 16,
+    fontWeight: "bold",
   },
 });
