@@ -81,7 +81,6 @@ export const deletePassword = async (req: AuthRequest, res: Response) => {
       return res.status(404).json({ message: "Şifre bulunamadı." });
     }
 
-    // Kullanıcının kendi şifresini sildiğinden emin ol
     if (item.user?.toString() !== req.user?._id?.toString()) {
       return res
         .status(403)
