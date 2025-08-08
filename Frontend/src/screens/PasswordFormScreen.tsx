@@ -1,6 +1,13 @@
 //KÜTÜPHANELER
 import React, { useState } from "react";
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TextInput,
+  ActivityIndicator,
+  TouchableOpacity,
+  Alert,
+} from "react-native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 //TYPES
@@ -8,6 +15,9 @@ import { RootStackParamList } from "../types/types";
 
 //SERVICES
 import { createPassword, updatePassword } from "../services/passwordApi";
+
+//STYLES
+import { passwordFormStyles } from "src/styles/PasswordFormScreen";
 
 type Props = NativeStackScreenProps<RootStackParamList, "PasswordForm">;
 
@@ -46,60 +56,48 @@ const PasswordFormScreen = ({ navigation, route }: Props) => {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>
+    <View style={passwordFormStyles.container}>
+      <Text style={passwordFormStyles.title}>
         {isEditing ? "Şifreyi Düzenle" : "Yeni Şifre Ekle"}
       </Text>
       <TextInput
-        style={styles.input}
+        style={passwordFormStyles.input}
         placeholder="Servis (Ör: Google, GitHub)"
+        placeholderTextColor="#6c757d"
         value={service}
         onChangeText={setService}
       />
       <TextInput
-        style={styles.input}
+        style={passwordFormStyles.input}
         placeholder="Kullanıcı Adı veya E-posta"
+        placeholderTextColor="#6c757d"
         value={username}
         onChangeText={setUsername}
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
+        style={passwordFormStyles.input}
         placeholder="Şifre"
+        placeholderTextColor="#6c757d"
         value={password}
         onChangeText={setPassword}
         secureTextEntry={!isEditing}
       />
-      <Button
-        title={isLoading ? "Kaydediliyor..." : "Kaydet"}
+      <TouchableOpacity
+        style={passwordFormStyles.buttonContainer}
         onPress={handleSave}
         disabled={isLoading}
-      />
+      >
+        <View style={passwordFormStyles.saveButton}>
+          {isLoading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
+            <Text style={passwordFormStyles.saveButtonText}>Kaydet</Text>
+          )}
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-    backgroundColor: "#f8f9fa",
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: "bold",
-    marginBottom: 20,
-    textAlign: "center",
-  },
-  input: {
-    backgroundColor: "#fff",
-    padding: 15,
-    borderRadius: 8,
-    marginBottom: 15,
-    fontSize: 16,
-    borderWidth: 1,
-    borderColor: "#ccc",
-  },
-});
 
 export default PasswordFormScreen;
