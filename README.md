@@ -9,7 +9,20 @@ Bu proje, kullanıcıların kolay bir şekilde kullanıcı adlarını ve şifrel
 * **✏️ Şifreleri Düzenleme:** Var olan şfirelerinizi anında güncelleyin.
 * **🔒 Tüm Şifreleriniz Tek Ekranda:** Uygulamaya eklemiş olduğunuz tüm kullanıcı adlarınız ve şifreleriniz tek ekranda.
 * **🔑 Şifrelerinizi Tüm Detaylarıyla Görüntüleyin:** Uygulama eklediğiniz tüm şifrelerinizi detaylıca görüntüleyin.
-  
+
+### 📸 Ekran Görüntüleri 
+| Login Ekranı | Kayıt Ekranı | 
+| :---------------------------------: | :------------------------: |
+| <img width="540" height="1110" alt="1LoginScreen" src="https://github.com/user-attachments/assets/75c61bf1-9b0a-4d96-942c-33ae9418536a" /> | <img width="540" height="1110" alt="2RegisterScreen" src="https://github.com/user-attachments/assets/db5d0060-908b-4840-bf1d-0d78789017bc" />
+
+| Passwords Ekranı | New Password Ekranı | 
+| :---------------------------------: | :------------------------: |
+|<img width="540" height="1110" alt="3PasswordsScreen" src="https://github.com/user-attachments/assets/bdd0fad5-be53-4160-8dbb-db018f196247" /> | <img width="540" height="1110" alt="4NewPasswordScreen" src="https://github.com/user-attachments/assets/438b746f-6082-4965-8c39-33daea73afd1" />
+
+| Edit Password Ekranı | Password Details Ekranı | 
+| :---------------------------------: | :------------------------: |
+| <img width="540" height="1110" alt="5EditPassword" src="https://github.com/user-attachments/assets/994448f1-f8ee-4831-9318-bae9cb3e5737" /> | <img width="540" height="1110" alt="6PasswordDetails" src="https://github.com/user-attachments/assets/7ee6243f-41b2-4199-b374-a4d1c28addae" />
+
 ## 🚀 Kurulum ve Çalıştırma 
 
 1.  **Gereksinimler:**
